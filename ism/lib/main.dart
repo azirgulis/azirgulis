@@ -5,6 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'core/constants/firebase_options.dart';
 import 'core/theme/app_theme.dart';
 import 'core/routing/app_router.dart';
+import 'providers/settings_provider.dart';
 import 'services/local/local_storage_service.dart';
 
 void main() async {
@@ -35,13 +36,14 @@ class ISMApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(goRouterProvider);
+    final themeMode = ref.watch(themeModeProvider);
 
     return MaterialApp.router(
       title: 'ISM - Build Your Business Empire',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme(),
       darkTheme: AppTheme.darkTheme(),
-      themeMode: ThemeMode.system, // TODO: Make this dynamic with Riverpod
+      themeMode: themeMode,
       routerConfig: router,
     );
   }
