@@ -9,6 +9,9 @@ import '../../features/onboarding/presentation/screens/business_selection_screen
 import '../../features/onboarding/presentation/screens/learning_style_quiz_screen.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
 import '../../features/economics/presentation/screens/economics_home_screen.dart';
+import '../../features/economics/presentation/screens/lesson_detail_screen.dart';
+import '../../features/economics/presentation/screens/quiz_screen.dart';
+import '../../features/economics/presentation/screens/quiz_results_screen.dart';
 import '../../features/management/presentation/screens/management_home_screen.dart';
 import '../../features/business/presentation/screens/business_home_screen.dart';
 import '../../features/marketing/presentation/screens/marketing_home_screen.dart';
@@ -79,6 +82,35 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/economics',
         builder: (context, state) => const EconomicsHomeScreen(),
+      ),
+      GoRoute(
+        path: '/economics/lesson/:lessonNumber',
+        builder: (context, state) {
+          final lessonNumber = int.parse(state.pathParameters['lessonNumber']!);
+          return LessonDetailScreen(lessonNumber: lessonNumber);
+        },
+      ),
+      GoRoute(
+        path: '/economics/lesson/:lessonNumber/quiz',
+        builder: (context, state) {
+          final lessonNumber = int.parse(state.pathParameters['lessonNumber']!);
+          return QuizScreen(lessonNumber: lessonNumber);
+        },
+      ),
+      GoRoute(
+        path: '/economics/lesson/:lessonNumber/quiz/results',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>;
+          return QuizResultsScreen(
+            correctAnswers: extra['correctAnswers'] as int,
+            totalQuestions: extra['totalQuestions'] as int,
+            score: extra['score'] as int,
+            xpEarned: extra['xpEarned'] as int,
+            coinsEarned: extra['coinsEarned'] as int,
+            gemsEarned: extra['gemsEarned'] as int,
+            isPerfect: extra['isPerfect'] as bool,
+          );
+        },
       ),
       GoRoute(
         path: '/management',
