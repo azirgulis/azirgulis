@@ -151,6 +151,73 @@ class EconomicsHomeScreen extends ConsumerWidget {
             ),
           ),
 
+          // Mini-Games Section
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.games, color: AppColors.economicsColor),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Mini-Games',
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _buildMiniGameCard(
+                          context,
+                          'Market Matcher',
+                          'Match scenarios to supply/demand shifts',
+                          Icons.swap_horiz,
+                          () => context.push('/economics/games/market-matcher'),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: _buildMiniGameCard(
+                          context,
+                          'Inflation Station',
+                          'Coming Soon',
+                          Icons.trending_up,
+                          null,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // Lessons Header
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
+              child: Row(
+                children: [
+                  Icon(Icons.school, color: AppColors.economicsColor),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Lessons',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
           // Lessons List
           SliverPadding(
             padding: const EdgeInsets.all(16),
@@ -173,6 +240,75 @@ class EconomicsHomeScreen extends ConsumerWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildMiniGameCard(
+    BuildContext context,
+    String title,
+    String description,
+    IconData icon,
+    VoidCallback? onTap,
+  ) {
+    final isLocked = onTap == null;
+
+    return Card(
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            gradient: isLocked
+                ? null
+                : LinearGradient(
+                    colors: [
+                      AppColors.economicsColor.withOpacity(0.1),
+                      AppColors.economicsColor.withOpacity(0.05),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: isLocked
+                      ? Colors.grey.withOpacity(0.2)
+                      : AppColors.economicsColor.withOpacity(0.2),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  isLocked ? Icons.lock : icon,
+                  color: isLocked ? Colors.grey : AppColors.economicsColor,
+                  size: 32,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                title,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: isLocked ? Colors.grey : null,
+                    ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                description,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: isLocked ? Colors.grey : null,
+                    ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

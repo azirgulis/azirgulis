@@ -12,6 +12,7 @@ import '../../features/economics/presentation/screens/economics_home_screen.dart
 import '../../features/economics/presentation/screens/lesson_detail_screen.dart';
 import '../../features/economics/presentation/screens/quiz_screen.dart';
 import '../../features/economics/presentation/screens/quiz_results_screen.dart';
+import '../../features/economics/presentation/games/market_matcher_game.dart';
 import '../../features/management/presentation/screens/management_home_screen.dart';
 import '../../features/business/presentation/screens/business_home_screen.dart';
 import '../../features/marketing/presentation/screens/marketing_home_screen.dart';
@@ -111,6 +112,10 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             isPerfect: extra['isPerfect'] as bool,
           );
         },
+      ),
+      GoRoute(
+        path: '/economics/games/market-matcher',
+        builder: (context, state) => const MarketMatcherGame(),
       ),
       GoRoute(
         path: '/management',
