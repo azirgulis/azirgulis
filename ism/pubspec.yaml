@@ -21,6 +21,7 @@ dependencies:
   animations: ^2.0.11
   shimmer: ^3.0.0
   cached_network_image: ^3.3.1
+  flutter_markdown: ^0.6.18
 
   # Navigation
   go_router: ^13.0.0
