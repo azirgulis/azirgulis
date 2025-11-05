@@ -128,6 +128,15 @@ class HomeScreen extends ConsumerWidget {
                 
                 // Quick actions
                 ElevatedButton.icon(
+                  onPressed: () => context.push('/rewards'),
+                  icon: const Icon(Icons.card_giftcard),
+                  label: const Text('Daily Rewards'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.errorRed,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                ElevatedButton.icon(
                   onPressed: () => context.go('/leaderboard'),
                   icon: const Icon(Icons.leaderboard),
                   label: const Text('View Leaderboard'),
