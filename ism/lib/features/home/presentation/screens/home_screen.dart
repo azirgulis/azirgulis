@@ -18,12 +18,19 @@ class HomeScreen extends ConsumerWidget {
         title: const Text('ISM - Home'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.shopping_bag),
+            onPressed: () => context.push('/shop'),
+            tooltip: 'Avatar Shop',
+          ),
+          IconButton(
             icon: const Icon(Icons.emoji_events),
             onPressed: () => context.push('/achievements'),
+            tooltip: 'Achievements',
           ),
           IconButton(
             icon: const Icon(Icons.person),
             onPressed: () => context.go('/profile'),
+            tooltip: 'Profile',
           ),
         ],
       ),
