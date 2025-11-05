@@ -20,6 +20,7 @@ import '../../features/profile/presentation/screens/profile_screen.dart';
 import '../../features/leaderboard/presentation/screens/leaderboard_screen.dart';
 import '../../features/achievements/presentation/screens/achievements_screen.dart';
 import '../../features/settings/presentation/screens/settings_screen.dart';
+import '../../features/progress/presentation/screens/progress_dashboard_screen.dart';
 import '../../providers/auth_provider.dart';
 
 final goRouterProvider = Provider<GoRouter>((ref) {
@@ -146,6 +147,10 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/settings',
         builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: '/progress',
+        builder: (context, state) => const ProgressDashboardScreen(),
       ),
     ],
   );

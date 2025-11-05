@@ -45,18 +45,32 @@ class HomeScreen extends ConsumerWidget {
                   data: (progressData) {
                     if (progressData == null) return const SizedBox();
                     return Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Level ${progressData.level}',
-                                style: Theme.of(context).textTheme.titleLarge),
-                            const SizedBox(height: 8),
-                            Text('XP: ${progressData.xp}'),
-                            Text('Coins: ${progressData.coins}'),
-                            Text('Gems: ${progressData.gems}'),
-                          ],
+                      child: InkWell(
+                        onTap: () => context.push('/progress'),
+                        borderRadius: BorderRadius.circular(12),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Level ${progressData.level}',
+                                        style: Theme.of(context).textTheme.titleLarge),
+                                    const SizedBox(height: 8),
+                                    Text('XP: ${progressData.xp}'),
+                                    Text('Coins: ${progressData.coins}'),
+                                    Text('Gems: ${progressData.gems}'),
+                                  ],
+                                ),
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                color: AppColors.primaryColor,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );
