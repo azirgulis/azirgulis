@@ -187,9 +187,9 @@ class EconomicsHomeScreen extends ConsumerWidget {
                         child: _buildMiniGameCard(
                           context,
                           'Inflation Station',
-                          'Coming Soon',
+                          'Calculate prices with inflation',
                           Icons.trending_up,
-                          null,
+                          () => context.push('/economics/games/inflation-station'),
                         ),
                       ),
                     ],

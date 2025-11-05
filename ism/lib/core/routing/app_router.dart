@@ -13,6 +13,7 @@ import '../../features/economics/presentation/screens/lesson_detail_screen.dart'
 import '../../features/economics/presentation/screens/quiz_screen.dart';
 import '../../features/economics/presentation/screens/quiz_results_screen.dart';
 import '../../features/economics/presentation/games/market_matcher_game.dart';
+import '../../features/economics/presentation/games/inflation_station_game.dart';
 import '../../features/management/presentation/screens/management_home_screen.dart';
 import '../../features/business/presentation/screens/business_home_screen.dart';
 import '../../features/marketing/presentation/screens/marketing_home_screen.dart';
@@ -120,6 +121,10 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/economics/games/market-matcher',
         builder: (context, state) => const MarketMatcherGame(),
+      ),
+      GoRoute(
+        path: '/economics/games/inflation-station',
+        builder: (context, state) => const InflationStationGame(),
       ),
       GoRoute(
         path: '/management',
