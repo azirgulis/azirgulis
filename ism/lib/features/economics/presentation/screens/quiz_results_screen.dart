@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:confetti/confetti.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../providers/achievement_provider.dart';
+import '../../../../widgets/notifications/achievement_notification.dart';
 
-class QuizResultsScreen extends StatefulWidget {
+class QuizResultsScreen extends ConsumerStatefulWidget {
   final int correctAnswers;
   final int totalQuestions;
   final int score;
@@ -24,10 +27,10 @@ class QuizResultsScreen extends StatefulWidget {
   });
 
   @override
-  State<QuizResultsScreen> createState() => _QuizResultsScreenState();
+  ConsumerState<QuizResultsScreen> createState() => _QuizResultsScreenState();
 }
 
-class _QuizResultsScreenState extends State<QuizResultsScreen>
+class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late ConfettiController _confettiController;
@@ -49,6 +52,42 @@ class _QuizResultsScreenState extends State<QuizResultsScreen>
       Future.delayed(const Duration(milliseconds: 500), () {
         _confettiController.play();
       });
+    }
+
+    // Check for achievements after displaying results
+    Future.delayed(const Duration(milliseconds: 2000), () {
+      _checkAchievements();
+    });
+  }
+
+  Future<void> _checkAchievements() async {
+    if (!mounted) return;
+
+    // Check quiz-related achievements
+    final newAchievements = await ref
+        .read(achievementCheckerProvider.notifier)
+        .checkAfterQuiz(
+          pillarId: 'economics',
+          isPerfect: widget.isPerfect,
+          perfectScoreStreak: 1, // TODO: Track this properly
+          quizzesCompleted: 1, // This will be calculated from progress
+        );
+
+    // Show notification for each new achievement
+    if (mounted && newAchievements.isNotEmpty) {
+      for (var i = 0; i < newAchievements.length; i++) {
+        final achievement = newAchievements[i];
+        // Delay each notification slightly so they don't overlap
+        Future.delayed(Duration(milliseconds: i * 4500), () {
+          if (mounted) {
+            AchievementNotificationOverlay.show(
+              context,
+              achievement,
+              onTap: () => context.push('/achievements'),
+            );
+          }
+        });
+      }
     }
   }
 

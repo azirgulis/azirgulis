@@ -18,6 +18,7 @@ import '../../features/business/presentation/screens/business_home_screen.dart';
 import '../../features/marketing/presentation/screens/marketing_home_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
 import '../../features/leaderboard/presentation/screens/leaderboard_screen.dart';
+import '../../features/achievements/presentation/screens/achievements_screen.dart';
 import '../../providers/auth_provider.dart';
 
 final goRouterProvider = Provider<GoRouter>((ref) {
@@ -136,6 +137,10 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/leaderboard',
         builder: (context, state) => const LeaderboardScreen(),
+      ),
+      GoRoute(
+        path: '/achievements',
+        builder: (context, state) => const AchievementsScreen(),
       ),
     ],
   );
